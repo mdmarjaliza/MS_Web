@@ -33,5 +33,5 @@ class UserPostsListView(View):
         }
         r = requests.get('http://127.0.0.1:9002/api/1.0/userposts', headers=headers)
         userposts = r.json()
-        context = {'posts_list': userposts[:5]}
-        return render(request, "MSWeb/home.html", context)
+        context = {'posts_list': userposts[:5], 'blogger': blogger}
+        return render(request, "MSWeb/includes/user_posts.html", context)
