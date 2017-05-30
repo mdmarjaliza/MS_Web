@@ -32,6 +32,27 @@ class UserPostsListView(View):
             'XBLOGGERID': blogger_id
         }
         r = requests.get('http://127.0.0.1:9002/api/1.0/userposts', headers=headers)
+        # if r.status_code==500:
+        #
         userposts = r.json()
         context = {'posts_list': userposts[:5], 'blogger': blogger}
         return render(request, "MSWeb/includes/user_posts.html", context)
+
+
+class WebPostDetailView(View):
+    def get(self, request):
+        """
+        Renderiza el detalle de un post
+        :param
+        :return:
+        """
+        blogger = request.META.get('HTTP_X_BLOGGER')
+        post_id = request.META.get('HTTP_X_POSTID')
+        headers = {
+            'X-BLOGGER': blogger,
+            'X-POSTID': post_id
+        }
+        r = requests.get('http://127.0.0.1:9002/api/1.0/postdetail', headers=headers)
+        post = r.json()
+        context = {'post': post}
+        return render(request, "MSWeb/includes/post_detail.html", context)
