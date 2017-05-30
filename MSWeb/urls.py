@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from MSWeb.views import ListView
+from MSWeb.views import ListView, UserPostsListView
 
 urlpatterns = [
     url(r'^postList', ListView.as_view(), name='posts_list'),
+    url(r'^userPostList', UserPostsListView.as_view(), name='posts_list'),
 ]

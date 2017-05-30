@@ -1,0 +1,18 @@
+#virtual enviroment
+env/
+win_env/
+
+#database
+db.sqlite3
+
+#pycharm (opciones del proyecto de pycharm)
+.idea
+
+#python bytecode files  (archivos precompilados de python)
+*.pyc
+
+#migrations from user model
+users/migrations/
+
+node_modules/
+
