@@ -1,8 +1,6 @@
 import requests
 from django.shortcuts import render
-from django.utils.encoding import smart_text
 from django.views import View
-from rest_framework.authentication import get_authorization_header
 
 
 class ListView(View):
@@ -32,8 +30,6 @@ class UserPostsListView(View):
             'XBLOGGERID': blogger_id
         }
         r = requests.get('http://127.0.0.1:9002/api/1.0/userposts', headers=headers)
-        # if r.status_code==500:
-        #
         userposts = r.json()
         context = {'posts_list': userposts[:5], 'blogger': blogger}
         return render(request, "MSWeb/includes/user_posts.html", context)
@@ -52,7 +48,11 @@ class WebPostDetailView(View):
             'X-BLOGGER': blogger,
             'X-POSTID': post_id
         }
-        r = requests.get('http://127.0.0.1:9002/api/1.0/postdetail', headers=headers)
-        post = r.json()
-        context = {'post': post}
+        respuesta_post = requests.get('http://127.0.0.1:9002/api/1.0/postdetail', headers=headers)
+        post = respuesta_post.json()
+
+        respuesta_comments = requests.get('http://127.0.0.1:9003/api/1.0/comment/' + post_id)
+        comments = respuesta_comments.json()
+
+        context = {'post': post, 'comments_list': comments}
         return render(request, "MSWeb/includes/post_detail.html", context)

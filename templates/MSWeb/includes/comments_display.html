@@ -1,0 +1,10 @@
+{% for comment in comments_list %}
+    <article class="articulo">
+        <div class="text-container">
+		    <h4 class="art-headline">{{ comment.comment_author }}</h4>
+            <h6 class="art-headline">{{ comment.publication_datetime }}</h6>
+            <p class="art-text"> {{ comment.comment }}</p>
+		</div>
+        <hr>
+    </article>
+{% endfor %}

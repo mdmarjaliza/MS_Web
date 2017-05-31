@@ -26,9 +26,19 @@
 					</div>
 					<div class="text-container">
 						<h2 class="art-headline">{{ post.title }}</h2>
-						<p class="art-text-extended">{{ post.intro }}</p>
+                        <p class="art-text-extended">{{ post.intro }}</p>
+						<p class="art-text-extended">{{ post.content }}</p>
 					</div>
 				</article>
+                <br>
+                <br>
+                <br>
+                {% if comments_list|length > 0 %}
+                    <h3>Últimos comentarios publicados</h3>
+                    {% include "MSWeb/includes/comments_display.html" %}
+                {% else %}
+                    {% include "MSWeb/includes/no_comments_msg.html" %}
+                {% endif %}
 		</div>
 	</div>
 {% endblock %}
